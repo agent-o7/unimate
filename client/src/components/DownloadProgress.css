@@ -1,0 +1,183 @@
+/* Download Progress Styles */
+.download-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-normal);
+}
+
+.download-progress.complete {
+    border-color: rgba(16, 185, 129, 0.3);
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.download-progress.error {
+    border-color: rgba(239, 68, 68, 0.3);
+    background: rgba(239, 68, 68, 0.05);
+}
+
+/* Thumbnail */
+.download-thumbnail {
+    position: relative;
+    width: 80px;
+    height: 45px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.download-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.platform-dot {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: var(--radius-full);
+    border: 2px solid var(--bg-secondary);
+}
+
+.platform-dot.youtube {
+    background: var(--youtube-color);
+}
+
+.platform-dot.tiktok {
+    background: var(--tiktok-color);
+}
+
+.platform-dot.unknown {
+    background: var(--text-muted);
+}
+
+/* Info */
+.download-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.download-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: var(--space-xs);
+}
+
+.download-status {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+}
+
+.download-progress.complete .download-status {
+    color: var(--success);
+}
+
+.download-progress.error .download-status {
+    color: var(--error);
+}
+
+/* Progress Bar */
+.progress-bar-container {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--accent-gradient);
+    border-radius: var(--radius-full);
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.progress-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+    animation: shimmer 1.5s infinite;
+    background-size: 200% 100%;
+}
+
+/* Actions */
+.download-actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-shrink: 0;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.save-btn {
+    background: var(--success);
+    color: white;
+}
+
+.save-btn:hover {
+    background: #0ea572;
+    transform: translateY(-1px);
+}
+
+.remove-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    padding: var(--space-sm);
+}
+
+.remove-btn:hover {
+    background: rgba(239, 68, 68, 0.2);
+    color: var(--error);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .download-progress {
+        flex-wrap: wrap;
+    }
+
+    .download-thumbnail {
+        width: 60px;
+        height: 34px;
+    }
+
+    .download-info {
+        flex: 1 1 calc(100% - 80px);
+    }
+
+    .download-actions {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: var(--space-sm);
+    }
+}
