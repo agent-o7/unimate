@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
     plugins: [react()],
     server: {
-        port: 3000,
+        port: 3001,
         proxy: {
             '/api': {
                 target: 'https://unimate-lvq3.onrender.com:3001',
@@ -13,4 +13,5 @@ export default defineConfig({
         }
     }
 })
+
 
