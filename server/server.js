@@ -171,8 +171,8 @@ server.listen(PORT, '127.0.0.1', () => {
 ║                                                            ║
 ║   🎬 YouTube & TikTok Downloader Server                   ║
 ║                                                            ║
-║   Server running at: http://127.0.0.1:${PORT}               ║
-║   WebSocket at: ws://127.0.0.1:${PORT}                      ║
+║   Server running at: http://0.0.0.0:${PORT}               ║
+║   WebSocket at: ws://0.0.0.0:${PORT}                      ║
 ║                                                            ║
 ╚════════════════════════════════════════════════════════════╝
   `);
@@ -189,3 +189,4 @@ server.listen(PORT, '127.0.0.1', () => {
         }
     });
 });
+
