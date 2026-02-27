@@ -5,7 +5,9 @@ import VideoPreview from './components/VideoPreview'
 import DownloadProgress from './components/DownloadProgress'
 
 const API_BASE = '/api'
-const WS_URL = `ws://${window.location.hostname}:3001`
+// const WS_URL = `ws://${window.location.hostname}:3001`
+const WS_URL = `ws://unimate-lvq3.onrender.com:3001`
+
 
 function App() {
     const [videoInfo, setVideoInfo] = useState(null)
@@ -220,3 +222,4 @@ function App() {
 }
 
 export default App
+
