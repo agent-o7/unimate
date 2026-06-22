@@ -3,6 +3,7 @@ import './VideoPreview.css'
 
 function VideoPreview({ video, onDownload }) {
     const [selectedFormat, setSelectedFormat] = useState('best')
+    const [audioOnly, setAudioOnly] = useState(false)
     const [downloading, setDownloading] = useState(false)
 
     const formatDuration = (seconds) => {
@@ -30,7 +31,7 @@ function VideoPreview({ video, onDownload }) {
 
     const handleDownload = async () => {
         setDownloading(true)
-        await onDownload(selectedFormat)
+        await onDownload(audioOnly ? 'bestaudio' : selectedFormat, audioOnly)
         setDownloading(false)
     }
 
@@ -38,14 +39,9 @@ function VideoPreview({ video, onDownload }) {
 
     return (
         <div className="video-preview glass">
-            {/* Thumbnail */}
             <div className="thumbnail-container">
                 {video.thumbnail ? (
-                    <img
-                        src={video.thumbnail}
-                        alt={video.title}
-                        className="thumbnail"
-                    />
+                    <img src={video.thumbnail} alt={video.title} className="thumbnail" />
                 ) : (
                     <div className="thumbnail-placeholder">
                         <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48">
@@ -61,7 +57,6 @@ function VideoPreview({ video, onDownload }) {
                 </div>
             </div>
 
-            {/* Info */}
             <div className="video-info">
                 <h3 className="video-title">{video.title}</h3>
                 {video.uploader && (
@@ -73,25 +68,58 @@ function VideoPreview({ video, onDownload }) {
                     </p>
                 )}
 
-                {/* Format Selection */}
-                <div className="format-section">
-                    <label className="format-label">Quality:</label>
-                    <select
-                        value={selectedFormat}
-                        onChange={(e) => setSelectedFormat(e.target.value)}
-                        className="format-select"
+                <div className="mode-toggle">
+                    <button
+                        className={`mode-btn ${!audioOnly ? 'active' : ''}`}
+                        onClick={() => setAudioOnly(false)}
                     >
-                        {video.formats?.map(format => (
-                            <option key={format.formatId} value={format.formatId}>
-                                {format.quality}
-                                {format.ext && ` (${format.ext})`}
-                                {format.filesize && ` - ${formatFileSize(format.filesize)}`}
-                            </option>
-                        ))}
-                    </select>
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                            <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z" />
+                        </svg>
+                        Video
+                    </button>
+                    <button
+                        className={`mode-btn ${audioOnly ? 'active' : ''}`}
+                        onClick={() => setAudioOnly(true)}
+                    >
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+                        </svg>
+                        Audio
+                    </button>
                 </div>
 
-                {/* Download Button */}
+                {!audioOnly && (
+                    <div className="format-section">
+                        <label className="format-label">Quality:</label>
+                        <select
+                            value={selectedFormat}
+                            onChange={(e) => setSelectedFormat(e.target.value)}
+                            className="format-select"
+                        >
+                            {video.formats?.map(format => (
+                                <option key={format.formatId} value={format.formatId}>
+                                    {format.quality}
+                                    {format.ext && ` (${format.ext})`}
+                                    {format.filesize && ` - ${formatFileSize(format.filesize)}`}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                )}
+
+                {audioOnly && (
+                    <div className="format-section">
+                        <label className="format-label">Format: MP3 (Audio Only)</label>
+                        <div className="audio-info">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                            </svg>
+                            <span>Best quality MP3 will be extracted</span>
+                        </div>
+                    </div>
+                )}
+
                 <button
                     className="download-btn"
                     onClick={handleDownload}
@@ -107,7 +135,7 @@ function VideoPreview({ video, onDownload }) {
                             <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
                                 <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
                             </svg>
-                            Download Video
+                            {audioOnly ? 'Download MP3' : 'Download Video'}
                         </>
                     )}
                 </button>

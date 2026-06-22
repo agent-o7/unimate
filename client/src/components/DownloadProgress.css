@@ -18,6 +18,10 @@
     background: rgba(239, 68, 68, 0.05);
 }
 
+.download-progress.cancelled {
+    opacity: 0.5;
+}
+
 /* Thumbnail */
 .download-thumbnail {
     position: relative;
@@ -86,6 +90,10 @@
     color: var(--error);
 }
 
+.download-progress.cancelled .download-status {
+    color: var(--text-muted);
+}
+
 /* Progress Bar */
 .progress-bar-container {
     height: 4px;
@@ -117,6 +125,30 @@
     background-size: 200% 100%;
 }
 
+/* Progress Meta (speed, ETA, percentage) */
+.progress-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-xs);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.progress-percent {
+    font-weight: 600;
+    color: var(--accent-primary);
+    min-width: 3ch;
+}
+
+.progress-speed {
+    font-variant-numeric: tabular-nums;
+}
+
+.progress-eta {
+    font-variant-numeric: tabular-nums;
+}
+
 /* Actions */
 .download-actions {
     display: flex;
@@ -144,9 +176,9 @@
     color: white;
 }
 
-.save-btn:hover {
-    background: #0ea572;
-    transform: translateY(-1px);
+.cancel-btn {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--error);
 }
 
 .remove-btn {
@@ -155,9 +187,21 @@
     padding: var(--space-sm);
 }
 
-.remove-btn:hover {
-    background: rgba(239, 68, 68, 0.2);
-    color: var(--error);
+@media (hover: hover) {
+    .save-btn:hover {
+        background: #0ea572;
+        transform: translateY(-1px);
+    }
+
+    .cancel-btn:hover {
+        background: rgba(239, 68, 68, 0.25);
+        transform: translateY(-1px);
+    }
+
+    .remove-btn:hover {
+        background: rgba(239, 68, 68, 0.2);
+        color: var(--error);
+    }
 }
 
 /* Responsive */
@@ -179,5 +223,15 @@
         width: 100%;
         justify-content: flex-end;
         margin-top: var(--space-sm);
+    }
+
+    .action-btn {
+        min-height: 44px;
+        font-size: 0.9rem;
+    }
+
+    .progress-meta {
+        flex-wrap: wrap;
+        gap: var(--space-sm);
     }
 }

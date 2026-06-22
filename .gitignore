@@ -1,1 +1,16 @@
-./**/node_modules
+node_modules/
+.DS_Store
+dist/
+dist-ssr/
+*.local
+
+# Tauri / Rust build artifacts
+/client/src-tauri/target/
+/client/src-tauri/gen/
+/client/dist/
+
+# IDE files
+.vs/
+.vscode/
+out/
+build/

@@ -105,6 +105,57 @@
     flex-shrink: 0;
 }
 
+/* Mode Toggle (Video / Audio) */
+.mode-toggle {
+    display: flex;
+    gap: var(--space-xs);
+    padding: 3px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-lg);
+    width: fit-content;
+}
+
+.mode-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-lg);
+    border: none;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.mode-btn.active {
+    background: var(--accent-primary);
+    color: white;
+}
+
+.mode-btn:not(.active):hover {
+    color: var(--text-primary);
+}
+
+/* Audio Mode Info */
+.audio-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+    font-size: 0.85rem;
+}
+
+.audio-info svg {
+    flex-shrink: 0;
+}
+
 /* Format Selection */
 .format-section {
     display: flex;
@@ -131,10 +182,6 @@
     transition: all var(--transition-fast);
 }
 
-.format-select:hover {
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
 .format-select:focus {
     outline: none;
     border-color: var(--accent-primary);
@@ -144,6 +191,17 @@
 .format-select option {
     background: var(--bg-secondary);
     color: var(--text-primary);
+}
+
+@media (hover: hover) {
+    .format-select:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .download-btn:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+    }
 }
 
 /* Download Button */
@@ -162,11 +220,6 @@
     font-family: inherit;
     cursor: pointer;
     transition: all var(--transition-fast);
-}
-
-.download-btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
 }
 
 .download-btn:active:not(:disabled) {
@@ -188,6 +241,15 @@
     animation: spin 0.8s linear infinite;
 }
 
+/* Select arrow custom styling */
+.format-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23a0a0b0' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .video-preview {
@@ -199,6 +261,11 @@
         max-width: 400px;
         margin: 0 auto;
     }
+
+    .download-btn {
+        min-height: 48px;
+        font-size: 1.05rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -208,5 +275,10 @@
 
     .video-title {
         font-size: 1.1rem;
+    }
+
+    .format-select {
+        min-height: 44px;
+        font-size: 1rem;
     }
 }

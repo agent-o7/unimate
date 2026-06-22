@@ -90,14 +90,86 @@
     flex-shrink: 0;
 }
 
-.clear-btn:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--text-primary);
+@media (hover: hover) {
+    .clear-btn:hover:not(:disabled) {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text-primary);
+    }
+
+    .submit-btn:hover:not(:disabled) {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+    }
+
+    .platform-badge:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
 }
 
 .clear-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+/* Paste Button */
+.paste-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.paste-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+/* Drag & Drop Overlay */
+.drop-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(139, 92, 246, 0.1);
+    border-radius: var(--radius-xl);
+    backdrop-filter: blur(4px);
+    z-index: 10;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    animation: fadeIn 0.2s ease forwards;
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-container.drag-over {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+}
+
+/* Hint Badge */
+.hint-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(255, 255, 255, 0.08);
 }
 
 /* Submit Button */
@@ -118,11 +190,6 @@
     cursor: pointer;
     transition: all var(--transition-fast);
     flex-shrink: 0;
-}
-
-.submit-btn:hover:not(:disabled) {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
 }
 
 .submit-btn:active:not(:disabled) {
@@ -178,29 +245,45 @@
 @media (max-width: 640px) {
     .input-container {
         flex-wrap: wrap;
+        padding: var(--space-xs);
     }
 
     .platform-icon {
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
     }
 
     .platform-icon svg {
-        width: 20px;
-        height: 20px;
+        width: 22px;
+        height: 22px;
     }
 
     .url-input {
-        font-size: 0.95rem;
-        padding: var(--space-sm);
+        font-size: 1rem;
+        padding: var(--space-sm) var(--space-xs);
+        min-height: 44px;
     }
 
     .submit-btn {
         width: 100%;
         margin-top: var(--space-sm);
+        min-height: 48px;
+        font-size: 1rem;
     }
 
-    .clear-btn {
-        order: 3;
+    .clear-btn,
+    .paste-btn {
+        width: 44px;
+        height: 44px;
+    }
+
+    .supported-platforms {
+        gap: var(--space-sm);
+        flex-wrap: wrap;
+    }
+
+    .platform-badge {
+        padding: var(--space-sm) var(--space-md);
+        font-size: 0.85rem;
     }
 }

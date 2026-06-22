@@ -7,7 +7,8 @@
   box-sizing: border-box;
 }
 
-:root {
+:root,
+[data-theme="dark"] {
   /* Colors */
   --bg-primary: #0a0a0f;
   --bg-secondary: #12121a;
@@ -57,13 +58,91 @@
   --transition-slow: 400ms ease;
 }
 
+[data-theme="light"] {
+  --bg-primary: #f5f5f7;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(0, 0, 0, 0.02);
+  --bg-card-hover: rgba(0, 0, 0, 0.04);
+  --text-primary: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --text-muted: #a1a1a6;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.15);
+}
+
+/* Light theme adjustments */
+[data-theme="light"] .glass {
+  background: var(--bg-card);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .format-select option {
+  background: var(--bg-secondary);
+}
+
+[data-theme="light"] body::before {
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(6, 182, 212, 0.06) 0%, transparent 50%);
+}
+
+[data-theme="light"] .warning-banner code {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .clear-btn,
+[data-theme="light"] .paste-btn,
+[data-theme="light"] .theme-toggle,
+[data-theme="light"] .remove-btn {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .clear-btn:hover,
+[data-theme="light"] .paste-btn:hover,
+[data-theme="light"] .theme-toggle:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .mode-toggle {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .hint-badge {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .progress-bar-container {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .platform-icon {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .format-select {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
+  min-height: -webkit-fill-available;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+html {
+  height: -webkit-fill-available;
 }
 
 /* Background Effects */
@@ -167,8 +246,49 @@ body::before {
   }
 }
 
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .fade-in {
   animation: fadeIn 0.5s ease forwards;
+}
+
+.scale-in {
+  animation: scaleIn 0.3s ease forwards;
+}
+
+.slide-up {
+  animation: slideUp 0.4s ease forwards;
 }
 
 /* Utility Classes */
